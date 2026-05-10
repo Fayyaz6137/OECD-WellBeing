@@ -71,6 +71,7 @@ instance/
 # Sphinx documentation
 docs/_build/
 data/processed
+results
 
 # PyBuilder
 .pybuilder/
