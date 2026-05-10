@@ -1,16 +1,15 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def main():
+    print("Starting ...")
 
+    import urllib.request, os
+    os.makedirs('data/raw', exist_ok=True)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+    url = 'https://stats.oecd.org/FileView2.aspx?IDFile=4eb67b25-b4f2-4e2a-b37b-28a9a1a1f4d3'
+    print("Downloading OECD Regional Well-Being data...")
+    urllib.request.urlretrieve(url, 'data/raw/oecd_regional_wellbeing.xlsx')
+    print("Done!")
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+if __name__ == "__main__":
+    main()
