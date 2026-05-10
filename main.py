@@ -1,15 +1,24 @@
 
 
+
 def main():
-    print("Starting ...")
+    print(f'\n{"─" * 55} START {"─" * 55}\n')
 
-    import urllib.request, os
-    os.makedirs('data/raw', exist_ok=True)
+    # ---------------------------- 1. Test Setup ------------------------------- #
+    from configs import test_setup
 
-    url = 'https://stats.oecd.org/FileView2.aspx?IDFile=4eb67b25-b4f2-4e2a-b37b-28a9a1a1f4d3'
-    print("Downloading OECD Regional Well-Being data...")
-    urllib.request.urlretrieve(url, 'data/raw/oecd_regional_wellbeing.xlsx')
-    print("Done!")
+    test_setup.test_setup()
+
+    # ---------------------------- 2. Get Data ------------------------------- #
+    from src.data import fetch_data
+
+    df_raw = fetch_data.get_raw_data()
+
+    # ---------------------------- 3. Pre-process Data ------------------------------- #
+    from src.data import pre_process_data
+
+    pre_process_data.data_cleaning_and_preperation(df_raw)
+
 
 if __name__ == "__main__":
     main()
