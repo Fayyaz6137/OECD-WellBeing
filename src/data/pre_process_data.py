@@ -3,7 +3,7 @@ import os
 import numpy as np
 import pandas as pd
 
-from configs.config import DATA_PROCESSED_CSV_PATH, DATA_PROCESSED_DIR
+from configs.config import DATA_PROCESSED_CSV_PATH, DATA_PROCESSED_DIR, COLUMN_RENAME_MAPPING
 
 
 def drop_unwanted_columns_rows(df):
@@ -24,37 +24,9 @@ def drop_unwanted_columns_rows(df):
 
 def rename_columns(df):
     print("\nRenaming columns ...\n")
+
     # Rename to semantically clear names with units
-    df = df.rename(columns={
-        'Country': 'Country',
-        'Region': 'Region',
-        'Code': 'Code',
-
-        'Disposable income per capita': 'Disposable Income (USD PPP)',
-        'Employment rate': 'Employment Rate (%)',
-        'Unemployment rate': 'Unemployment Rate (%)',
-
-        'Homicide rate': 'Homicide Rate (per 100k)',
-        'Life expectancy': 'Life Expectancy (years)',
-
-        'Population with at least secondary education': 'Education (%)',
-
-        'Number of rooms per capita': 'Rooms per Person',
-
-        'Mortality rate': 'Mortality Rate (per 1k)',
-
-        'Voter turnout': 'Voter Turnout (%)',
-
-        'Households broadband access': 'Broadband Access (%)',
-
-        'Air quality (PM2.5)': 'Air Pollution (PM2.5 µg/m³)',
-
-        'Life satisfaction': 'Life Satisfaction (0–10)',
-
-        'Internet speed': 'Internet Speed Deviation (%)',
-
-        'Perceived social network support ': 'Social Support (%)'
-    })
+    df = df.rename(columns=COLUMN_RENAME_MAPPING)
 
     df_cleaned = df.copy()
     print("Renamed columns:", df_cleaned.columns.tolist())

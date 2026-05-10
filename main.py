@@ -4,6 +4,11 @@
 def main():
     print(f'\n{"─" * 55} START {"─" * 55}\n')
 
+    # ---------------------------- 0. Remove Old Data ------------------------------- #
+    print("\nRemoving Old Files ...\n")
+    from configs import clean_files
+    clean_files.clean_files()
+
     # ---------------------------- 1. Test Setup ------------------------------- #
     from configs import test_setup
 
