@@ -5,13 +5,16 @@ import seaborn as sns
 import os
 from matplotlib.colors import LinearSegmentedColormap
 from configs.config import PLOTS_DIR, DATA_PROCESSED_CSV_PATH, PALETTE, LINE_COLOURS
+from main import logging
+from main import Fore, Style, init
 
 df = pd.read_csv(DATA_PROCESSED_CSV_PATH)
 numeric_cols = df.select_dtypes(include='number').columns.tolist()
 
 
 def kda_analysis():
-    print("\nKDA Analysis ...\n")
+    logging.info(f'KDA Analysis ...')
+    print(f"\n{Fore.CYAN}KDA Analysis ...\n {Style.RESET_ALL}")
 
     n_cols = 2
     n_rows = (len(numeric_cols) + 1) // n_cols
@@ -50,13 +53,16 @@ def kda_analysis():
     )
 
     plt.show()
-    print("✓ Distribution plot saved")
+
+    print(f"{Fore.GREEN}\n✓ Distribution plot saved {str(os.path.join(PLOTS_DIR, '01_distributions.png'))} {Style.RESET_ALL} ")
+    logging.info(f'Distribution plot saved {str(os.path.join(PLOTS_DIR, '01_distributions.png'))}')
 
 
 def categorical_analysis():
-    print("\nCategorical Analysis ...\n")
-    # How many unique countries and regions?
+    logging.info(f'Categorical Analysis ...')
+    print(f"\n{Fore.CYAN}Categorical Analysis ...\n {Style.RESET_ALL}")
 
+    # How many unique countries and regions?
     n_countries = df['Country'].nunique()
     n_regions = df['Region'].nunique()
     print(f"\nCountry: {n_countries} unique values")
@@ -67,9 +73,13 @@ def categorical_analysis():
     print("\nTop 10 countries by region count:")
     print(regions_per_country.head(10))
 
+    logging.info(f'Top 10 countries by region count:\n {regions_per_country.head(10)}')
+
 
 def missing_values_analysis():
-    print("\nMissing Values Analysis ...\n")
+    logging.info(f'Missing Values Analysis ...')
+    print(f"\n{Fore.CYAN}Missing Values Analysis ...\n {Style.RESET_ALL}")
+
 
     missing_pct = df.isnull().mean() * 100
 
@@ -92,6 +102,11 @@ def missing_values_analysis():
     plt.savefig(os.path.join(PLOTS_DIR, '02_missingness.png'), dpi=150)
     plt.show()
 
+
+    print(f"{Fore.GREEN}\n✓ Missingness plot saved {str(os.path.join(PLOTS_DIR, '02_missingness.png'))} {Style.RESET_ALL} ")
+    logging.info(f'Missingness plot saved {str(os.path.join(PLOTS_DIR, '02_missingness.png'))}')
+
+
     # Test if missingness correlates with life satisfaction (MNAR check)
     target = 'Life Satisfaction (0–10)'
     print("\n=== MISSINGNESS vs LIFE SATISFACTION ===")
@@ -105,7 +120,8 @@ def missing_values_analysis():
 
 
 def correlation_matrix_pearson_heatmap():
-    print("\nCorrelation Matrix Pearson Heatmap ...")
+    logging.info(f'Correlation Matrix Pearson Heatmap ...')
+    print(f"\n{Fore.CYAN}Correlation Matrix Pearson Heatmap ...\n {Style.RESET_ALL}")
 
     # Pearson correlation matrix for all numeric columns
     corr = df[numeric_cols].corr(method='pearson')
@@ -136,6 +152,9 @@ def correlation_matrix_pearson_heatmap():
     plt.savefig(os.path.join(PLOTS_DIR, '03_correlation_matrix.png'), dpi=150)
     plt.show()
 
+    print(f"{Fore.GREEN}\n✓ Correlation Heatmap plot saved {str(os.path.join(PLOTS_DIR, '03_correlation_matrix.png'))} {Style.RESET_ALL} ")
+    logging.info(f'Correlation Heatmap plot saved {str(os.path.join(PLOTS_DIR, '03_correlation_matrix.png'))}')
+
     # Print top correlations with the target
     target_corr = corr['Life Satisfaction (0–10)'].drop('Life Satisfaction (0–10)'). \
         abs().sort_values(ascending=False)
@@ -143,12 +162,19 @@ def correlation_matrix_pearson_heatmap():
     print(target_corr.round(2))
 
 
+
+
 def eda():
-    print(f'\n{"─" * 55} EDA STARTING {"─" * 55}\n')
+    print(f'\n{"─" * 200}')
+    print(f'{" " * 55} {Fore.LIGHTGREEN_EX}4. EXPLORATORY DATA ANALYSIS {Style.RESET_ALL}')
+    print(f'{"─" * 200}\n')
+    logging.info(f'4. EXPLORATORY DATA ANALYSIS')
+
 
     kda_analysis()
     categorical_analysis()
     missing_values_analysis()
     correlation_matrix_pearson_heatmap()
 
-    print(f'\n{"─" * 55} EDA END {"─" * 55}\n')
+    logging.info(f'EDA DONE\n')
+    print(f'\n {Fore.LIGHTGREEN_EX}✓ EDA DONE {Style.RESET_ALL} {"─" * 20}\n')

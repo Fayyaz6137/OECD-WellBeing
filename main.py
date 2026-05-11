@@ -1,15 +1,28 @@
-import pandas as pd
+import os
 
-from configs.config import DATA_PROCESSED_CSV_PATH
+from configs.config import LOG_PATH, LOGS_DIR
 
+os.makedirs(LOGS_DIR, exist_ok=True)
+import logging
+
+logging.basicConfig(
+    filename=LOG_PATH,
+    format='%(asctime)s : %(levelname)s : %(message)s',
+    datefmt='%H:%M:%S',
+    level=logging.INFO  # set to INFO for verbose gensim output
+)
+from colorama import Fore, Style, init
+
+
+# init()
 
 def main():
-    print(f'\n{"─" * 55} START {"─" * 55}\n')
+    # print(f'\n{"─" * 55} {Fore.LIGHTGREEN_EX} START {Style.RESET_ALL} {"─" * 55}\n')
+    logging.info(f'START')
 
-    run_all = 0
+    run_all = 1
     if run_all:
-        # ---------------------------- 0. Remove Old Data ------------------------------- #
-        print("\nRemoving Old Files ...\n")
+        # ---------------------------- 0. Remove Old Data -------------------------------
         from configs import clean_files
         clean_files.clean_files()
 
@@ -33,9 +46,12 @@ def main():
 
         exp_data_analysis.eda()
 
-    # ---------------------------- 5. Processing ------------------------------- #
-    print('Testing')
+        # ---------------------------- 5. Processing ------------------------------- #
+        from src.processing import process
 
+        process.process_main()
+
+        logging.info(f'\nEND\n')
 
 
 if __name__ == "__main__":

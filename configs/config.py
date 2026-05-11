@@ -1,39 +1,39 @@
+from datetime import datetime
 import os
 
 from matplotlib import pyplot as plt
 
 # ---------------------------- PARAMS ------------------------------- #
 COLUMN_RENAME_MAPPING = {
-        'Country': 'Country',
-        'Region': 'Region',
-        'Code': 'Code',
+    'Country': 'Country',
+    'Region': 'Region',
+    'Code': 'Code',
 
-        'Disposable income per capita': 'Disposable Income (USD PPP)',
-        'Employment rate': 'Employment Rate (%)',
-        'Unemployment rate': 'Unemployment Rate (%)',
+    'Disposable income per capita': 'Disposable Income (USD PPP)',
+    'Employment rate': 'Employment Rate (%)',
+    'Unemployment rate': 'Unemployment Rate (%)',
 
-        'Homicide rate': 'Homicide Rate (per 100k)',
-        'Life expectancy': 'Life Expectancy (years)',
+    'Homicide rate': 'Homicide Rate (per 100k)',
+    'Life expectancy': 'Life Expectancy (years)',
 
-        'Population with at least secondary education': 'Education (%)',
+    'Population with at least secondary education': 'Education (%)',
 
-        'Number of rooms per capita': 'Rooms per Person',
+    'Number of rooms per capita': 'Rooms per Person',
 
-        'Mortality rate': 'Mortality Rate (per 1k)',
+    'Mortality rate': 'Mortality Rate (per 1k)',
 
-        'Voter turnout': 'Voter Turnout (%)',
+    'Voter turnout': 'Voter Turnout (%)',
 
-        'Households broadband access': 'Broadband Access (%)',
+    'Households broadband access': 'Broadband Access (%)',
 
-        'Air quality (PM2.5)': 'Air Pollution (PM2.5 µg/m³)',
+    'Air quality (PM2.5)': 'Air Pollution (PM2.5 µg/m³)',
 
-        'Life satisfaction': 'Life Satisfaction (0–10)',
+    'Life satisfaction': 'Life Satisfaction (0–10)',
 
-        'Internet speed': 'Internet Speed Deviation (%)',
+    'Internet speed': 'Internet Speed Deviation (%)',
 
-        'Perceived social network support ': 'Social Support (%)'
-    }
-
+    'Perceived social network support ': 'Social Support (%)'
+}
 
 # ---------------------------- SWITCHES ------------------------------- #
 DEBUG_SWITCH = 0  # DEBUG SWITCH
@@ -48,11 +48,25 @@ DATA_RAW_EXCEL_PATH = os.path.join(DATA_RAW_DIR, 'OECD-Regional-Well-Being-Data-
 DATA_PROCESSED_DIR = os.path.join(DATA_DIR, 'processed')
 DATA_PROCESSED_CSV_PATH = os.path.join(DATA_PROCESSED_DIR, 'oecd_cleaned.csv')
 
+DATA_PROCESSED_X_TRAINED_SCALED = os.path.join(DATA_PROCESSED_DIR, 'X_train_scaled.csv')
+DATA_PROCESSED_X_TEST_SCALED = os.path.join(DATA_PROCESSED_DIR, 'X_test_scaled.csv')
+DATA_PROCESSED_Y_TRAIN = os.path.join(DATA_PROCESSED_DIR, 'y_train.csv')
+DATA_PROCESSED_Y_TEST = os.path.join(DATA_PROCESSED_DIR, 'y_test.csv')
+
+DATA_PROCESSED_X_TRAINED_FINAL = os.path.join(DATA_PROCESSED_DIR, 'X_train_final.csv')
+DATA_PROCESSED_X_TEST_FINAL = os.path.join(DATA_PROCESSED_DIR, 'X_test_final.csv')
+
 # --- RESULTS ---
 RESULTS_DIR = 'results'
 PLOTS_DIR = os.path.join(RESULTS_DIR, 'plots')
-CLEAN_FILES=[DATA_PROCESSED_DIR,RESULTS_DIR]
 
+SELECTED_FEATURES_DIR = os.path.join(RESULTS_DIR, 'selected_features')
+
+LOGS_DIR = 'logs'
+LOG_PATH = os.path.join(LOGS_DIR, f"{datetime.now().strftime('%Y%m%d_%H%M%S')}.log")
+
+
+CLEAN_FILES = [DATA_PROCESSED_DIR, RESULTS_DIR]
 # ---------------------------- STYLE ------------------------------- #
 PALETTE = {
     'navy': '#1E3A5F',
