@@ -32,7 +32,6 @@ X_test_final = None
 
 # Random Forest Feature Importance
 def rf_feat_imp():
-    print("\nRandom Forest Feature Importance ...")
     logging.info(f'Random Forest Feature Importance ...')
     print(f"\n{Fore.CYAN}Random Forest Feature Importance ...\n {Style.RESET_ALL}")
 

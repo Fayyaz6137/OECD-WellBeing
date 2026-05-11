@@ -87,7 +87,7 @@ def missing_check(df):
     logging.info(f'Missingness (%):{missing_pct.round(2)}')
 
 
-def data_cleaning_and_preperation(df):
+def data_pre_processing(df):
     logging.info(f'3. DATA PREPROCESSING STARTING')
     print(f'\n{"─" * 200}')
     print(f'{" " * 55} {Fore.LIGHTGREEN_EX}3. DATA PREPROCESSING {Style.RESET_ALL} ')

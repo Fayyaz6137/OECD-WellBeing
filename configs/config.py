@@ -59,12 +59,16 @@ DATA_PROCESSED_X_TEST_FINAL = os.path.join(DATA_PROCESSED_DIR, 'X_test_final.csv
 # --- RESULTS ---
 RESULTS_DIR = 'results'
 PLOTS_DIR = os.path.join(RESULTS_DIR, 'plots')
-
+OUTPUTS_DIR = os.path.join(RESULTS_DIR, 'outputs')
 SELECTED_FEATURES_DIR = os.path.join(RESULTS_DIR, 'selected_features')
 
+# --- MODELS ---
+MODELS_DIR = os.path.join(RESULTS_DIR, 'models')
+RANDOM_FOREST_MODEL_PATH = os.path.join(MODELS_DIR, 'Random_Forest.pkl')
+
+# --- LOGS ---
 LOGS_DIR = 'logs'
 LOG_PATH = os.path.join(LOGS_DIR, f"{datetime.now().strftime('%Y%m%d_%H%M%S')}.log")
-
 
 CLEAN_FILES = [DATA_PROCESSED_DIR, RESULTS_DIR]
 # ---------------------------- STYLE ------------------------------- #
