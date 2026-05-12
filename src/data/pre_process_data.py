@@ -1,7 +1,6 @@
-import os
 import numpy as np
 import pandas as pd
-from configs.config import DATA_PROCESSED_CSV_PATH, DATA_PROCESSED_DIR, COLUMN_RENAME_MAPPING
+from configs.config_paths_and_params import DATA_PROCESSED_CSV_PATH, DATA_PROCESSED_DIR, COLUMN_RENAME_MAPPING
 from main import Fore, Style, init
 from main import logging
 
@@ -101,7 +100,6 @@ def data_pre_processing(df):
     print(f'\n\n{df.head()}')
     logging.info(f'\n{df.head()}')
 
-    os.makedirs(DATA_PROCESSED_DIR, exist_ok=True)
     df.to_csv(DATA_PROCESSED_CSV_PATH, index=False)
 
     print(f"{Fore.GREEN}\n✓ Cleaned data saved to {DATA_PROCESSED_CSV_PATH}{Style.RESET_ALL}")

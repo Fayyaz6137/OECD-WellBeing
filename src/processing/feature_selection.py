@@ -7,9 +7,9 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.feature_selection import mutual_info_regression, RFE
 from sklearn.linear_model import LinearRegression
 
-from configs.config import DATA_PROCESSED_X_TRAINED_SCALED, DATA_PROCESSED_Y_TRAIN, PLOTS_DIR, PALETTE, \
+from configs.config_paths_and_params import DATA_PROCESSED_X_TRAINED_SCALED, DATA_PROCESSED_Y_TRAIN, PLOTS_DIR, PALETTE, \
     DATA_PROCESSED_X_TEST_SCALED, DATA_PROCESSED_X_TRAINED_FINAL, DATA_PROCESSED_X_TEST_FINAL, RESULTS_DIR, \
-    DATA_PROCESSED_DIR
+    DATA_PROCESSED_DIR, PLOT_04_RF_IMPORTANCE_PATH, PLOT_05_MUTUAL_INFO_SCORE_PATH
 from main import logging
 from main import Fore, Style, init
 
@@ -38,7 +38,7 @@ def rf_feat_imp():
     # Exclude the _nan indicator columns from importance analysis (but keep for modelling)
     fig, ax = plt.subplots(figsize=(10, 6))
 
-    importances.plot(kind='barh', ax=ax, color=PALETTE['teal'])
+    importances.plot(kind='barh', ax=ax, color='#1e3a5f')
 
     ax.invert_yaxis()
     ax.set_title('Feature Importance from Random Forest', color=PALETTE['navy'], fontsize=14)
@@ -47,12 +47,12 @@ def rf_feat_imp():
     ax.tick_params(axis='y', colors=PALETTE['gray'])
     plt.tight_layout()
 
-    plt.savefig(os.path.join(PLOTS_DIR, '04_rf_importance.png'), dpi=150)
+    plt.savefig(PLOT_04_RF_IMPORTANCE_PATH, dpi=150)
     plt.show()
 
     print(
-        f"{Fore.GREEN}\n✓ Random Forest Feature Importance plot saved {str(os.path.join(PLOTS_DIR, '04_rf_importance.png'))} {Style.RESET_ALL} ")
-    logging.info(f'Random Forest Feature Importance plot saved {str(os.path.join(PLOTS_DIR, '04_rf_importance.png'))}')
+        f"{Fore.GREEN}\n✓ Random Forest Feature Importance plot saved {PLOT_04_RF_IMPORTANCE_PATH} {Style.RESET_ALL} ")
+    logging.info(f'Random Forest Feature Importance plot saved {PLOT_04_RF_IMPORTANCE_PATH}')
 
     print("\nRandom Forest Feature Importances:")
     print(importances.round(4))
@@ -68,7 +68,7 @@ def mutual_info_score():
     mi_series = pd.Series(mi_scores, index=base_cols).sort_values(ascending=False)
 
     fig, ax = plt.subplots(figsize=(10, 6))
-    mi_series.plot(kind='barh', ax=ax, color=PALETTE['teal'])
+    mi_series.plot(kind='barh', ax=ax, color='#1e3a5f')
     ax.invert_yaxis()
     ax.set_title('Mutual Information Scores', fontsize=14, color=PALETTE['navy'])
     ax.set_xlabel('Mutual Information with Life Satisfaction', color=PALETTE['gray'])
@@ -76,14 +76,11 @@ def mutual_info_score():
     ax.tick_params(axis='y', colors=PALETTE['gray'])
 
     plt.tight_layout()
-
-    plt.savefig(os.path.join(PLOTS_DIR, '05_mutual_info.png'), dpi=150)
-
+    plt.savefig(PLOT_05_MUTUAL_INFO_SCORE_PATH, dpi=150)
     plt.show()
 
-    print(
-        f"{Fore.GREEN}\n✓ Mutual Information Scores plot saved {str(os.path.join(PLOTS_DIR, '05_mutual_info.png'))} {Style.RESET_ALL} ")
-    logging.info(f'Mutual Information Scores plot saved {str(os.path.join(PLOTS_DIR, '05_mutual_info.png'))}')
+    print(f"{Fore.GREEN}\n✓ Mutual Information Scores plot saved {PLOT_05_MUTUAL_INFO_SCORE_PATH} {Style.RESET_ALL} ")
+    logging.info(f'Mutual Information Scores plot saved {PLOT_05_MUTUAL_INFO_SCORE_PATH}')
 
     print("\nMutual Information Scores:")
     print(mi_series.round(4))

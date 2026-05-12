@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 from matplotlib.colors import LinearSegmentedColormap
-from configs.config import PLOTS_DIR, DATA_PROCESSED_CSV_PATH, PALETTE, LINE_COLOURS
+from configs.config_paths_and_params import PLOTS_DIR, DATA_PROCESSED_CSV_PATH, PALETTE, LINE_COLOURS, PLOT_01_DISTRIBUTION_PATH, \
+    PLOT_02_MISSINGNESS_PATH, PLOT_03_CORRELATION_MATRIX_PATH
 from main import logging
 from main import Fore, Style, init
 
@@ -24,7 +25,7 @@ def kda_analysis():
     for i, col in enumerate(numeric_cols):
         ax = axes[i]
         data = df[col].dropna()
-        ax.hist(data, bins=25, color=PALETTE['teal'], alpha=0.6,
+        ax.hist(data, bins=25, color='#1e3a5f', alpha=0.6,
                 density=True)  # ← theme color # Histogram using your palette
         ax_kde_color = LINE_COLOURS[i % len(LINE_COLOURS)]  # KDE line using line palette (cycle colors)
         data.plot.kde(ax=ax, color=ax_kde_color, linewidth=2)
@@ -45,17 +46,11 @@ def kda_analysis():
     )
 
     plt.tight_layout()
-    os.makedirs(PLOTS_DIR, exist_ok=True)
-    plt.savefig(
-        os.path.join(PLOTS_DIR, '01_distributions.png'),
-        dpi=150,
-        bbox_inches='tight'
-    )
-
+    plt.savefig(PLOT_01_DISTRIBUTION_PATH, dpi=150, bbox_inches='tight')
     plt.show()
 
-    print(f"{Fore.GREEN}\n✓ Distribution plot saved {str(os.path.join(PLOTS_DIR, '01_distributions.png'))} {Style.RESET_ALL} ")
-    logging.info(f'Distribution plot saved {str(os.path.join(PLOTS_DIR, '01_distributions.png'))}')
+    print(f"{Fore.GREEN}\n✓ Distribution plot saved {PLOT_01_DISTRIBUTION_PATH} {Style.RESET_ALL} ")
+    logging.info(f'Distribution plot saved {PLOT_01_DISTRIBUTION_PATH}')
 
 
 def categorical_analysis():
@@ -80,7 +75,6 @@ def missing_values_analysis():
     logging.info(f'Missing Values Analysis ...')
     print(f"\n{Fore.CYAN}Missing Values Analysis ...\n {Style.RESET_ALL}")
 
-
     missing_pct = df.isnull().mean() * 100
 
     print("\n=== MISSING VALUES (%) ===")
@@ -90,22 +84,18 @@ def missing_values_analysis():
 
     missing_df = missing_pct[missing_pct > 0].sort_values(ascending=False)
     fig, ax = plt.subplots(figsize=(10, 4))
-    missing_df.plot(kind='bar', ax=ax, color=PALETTE['red'], edgecolor='none')
+    missing_df.plot(kind='bar', ax=ax, color='#8b1a4a', edgecolor='none')
     ax.set_title('Missing Values by Column (%)', color=PALETTE['navy'])
     ax.set_ylabel('% Missing', color=PALETTE['gray'])
     ax.tick_params(axis='x', rotation=45, colors=PALETTE['gray'])
     ax.tick_params(axis='y', colors=PALETTE['gray'])
 
     plt.tight_layout()
-
-    os.makedirs(PLOTS_DIR, exist_ok=True)
-    plt.savefig(os.path.join(PLOTS_DIR, '02_missingness.png'), dpi=150)
+    plt.savefig(PLOT_02_MISSINGNESS_PATH, dpi=150)
     plt.show()
 
-
-    print(f"{Fore.GREEN}\n✓ Missingness plot saved {str(os.path.join(PLOTS_DIR, '02_missingness.png'))} {Style.RESET_ALL} ")
-    logging.info(f'Missingness plot saved {str(os.path.join(PLOTS_DIR, '02_missingness.png'))}')
-
+    print(f"{Fore.GREEN}\n✓ Missingness plot saved {PLOT_02_MISSINGNESS_PATH} {Style.RESET_ALL} ")
+    logging.info(f'Missingness plot saved {PLOT_02_MISSINGNESS_PATH}')
 
     # Test if missingness correlates with life satisfaction (MNAR check)
     target = 'Life Satisfaction (0–10)'
@@ -148,12 +138,11 @@ def correlation_matrix_pearson_heatmap():
     ax.tick_params(colors=PALETTE['gray'])
 
     plt.tight_layout()
-    os.makedirs(PLOTS_DIR, exist_ok=True)
     plt.savefig(os.path.join(PLOTS_DIR, '03_correlation_matrix.png'), dpi=150)
     plt.show()
 
-    print(f"{Fore.GREEN}\n✓ Correlation Heatmap plot saved {str(os.path.join(PLOTS_DIR, '03_correlation_matrix.png'))} {Style.RESET_ALL} ")
-    logging.info(f'Correlation Heatmap plot saved {str(os.path.join(PLOTS_DIR, '03_correlation_matrix.png'))}')
+    print(f"{Fore.GREEN}\n✓ Correlation Heatmap plot saved {PLOT_03_CORRELATION_MATRIX_PATH} {Style.RESET_ALL} ")
+    logging.info(f'Correlation Heatmap plot saved {PLOT_03_CORRELATION_MATRIX_PATH}')
 
     # Print top correlations with the target
     target_corr = corr['Life Satisfaction (0–10)'].drop('Life Satisfaction (0–10)'). \
@@ -162,14 +151,11 @@ def correlation_matrix_pearson_heatmap():
     print(target_corr.round(2))
 
 
-
-
 def eda():
     print(f'\n{"─" * 200}')
     print(f'{" " * 55} {Fore.LIGHTGREEN_EX}4. EXPLORATORY DATA ANALYSIS {Style.RESET_ALL}')
     print(f'{"─" * 200}\n')
     logging.info(f'4. EXPLORATORY DATA ANALYSIS')
-
 
     kda_analysis()
     categorical_analysis()

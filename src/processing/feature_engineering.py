@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 
-from configs.config import DATA_PROCESSED_CSV_PATH, DATA_PROCESSED_X_TRAINED_SCALED, DATA_PROCESSED_Y_TRAIN, \
+from configs.config_paths_and_params import DATA_PROCESSED_CSV_PATH, DATA_PROCESSED_X_TRAINED_SCALED, DATA_PROCESSED_Y_TRAIN, \
     DATA_PROCESSED_X_TEST_SCALED, DATA_PROCESSED_Y_TEST, DATA_PROCESSED_DIR
 
 from main import logging

@@ -58,9 +58,28 @@ DATA_PROCESSED_X_TEST_FINAL = os.path.join(DATA_PROCESSED_DIR, 'X_test_final.csv
 
 # --- RESULTS ---
 RESULTS_DIR = 'results'
-PLOTS_DIR = os.path.join(RESULTS_DIR, 'plots')
-OUTPUTS_DIR = os.path.join(RESULTS_DIR, 'outputs')
+
 SELECTED_FEATURES_DIR = os.path.join(RESULTS_DIR, 'selected_features')
+
+OUTPUTS_DIR = os.path.join(RESULTS_DIR, 'outputs')
+TEST_METRICS_PATH = os.path.join(OUTPUTS_DIR, 'test_metrics.csv')
+TRAIN_METRICS_PATH = os.path.join(OUTPUTS_DIR, 'train_metrics.csv')
+GINI_BY_COUNTRY_PATH = os.path.join(OUTPUTS_DIR, 'gini_by_country.csv')
+
+# --- PLOTS ---
+PLOTS_DIR = os.path.join(RESULTS_DIR, 'plots')
+
+PLOT_01_DISTRIBUTION_PATH = os.path.join(PLOTS_DIR, '01_distributions.png')
+PLOT_02_MISSINGNESS_PATH = os.path.join(PLOTS_DIR, '02_missingness.png')
+PLOT_03_CORRELATION_MATRIX_PATH = os.path.join(PLOTS_DIR, '03_correlation_matrix.png')
+PLOT_04_RF_IMPORTANCE_PATH = os.path.join(PLOTS_DIR, '04_rf_importance.png')
+PLOT_05_MUTUAL_INFO_SCORE_PATH = os.path.join(PLOTS_DIR, '05_mutual_info.png')
+PLOT_06_RF_IMPORTANCE_TRAINED_PATH = os.path.join(PLOTS_DIR, '06_rf_importance_trained.png')
+PLOT_07_TRAIN_VS_TEST_R2_PATH = os.path.join(PLOTS_DIR, '07_train_vs_test.png')
+PLOT_08_ACTUAL_VS_PREDICTED_PATH = os.path.join(PLOTS_DIR, '08_actual_vs_predicted.png')
+PLOT_09_GINI_BY_COUNTRY_PATH = os.path.join(PLOTS_DIR, '09_gini_by_country.png')
+PLOT_10_REGIONAL_BOXPLOT_PATH = os.path.join(PLOTS_DIR, '10_regional_boxplot.png')
+PLOT_11_RESIDUALS_PATH = os.path.join(PLOTS_DIR, '11_residuals.png.png')
 
 # --- MODELS ---
 MODELS_DIR = os.path.join(RESULTS_DIR, 'models')
@@ -70,7 +89,9 @@ RANDOM_FOREST_MODEL_PATH = os.path.join(MODELS_DIR, 'Random_Forest.pkl')
 LOGS_DIR = 'logs'
 LOG_PATH = os.path.join(LOGS_DIR, f"{datetime.now().strftime('%Y%m%d_%H%M%S')}.log")
 
-CLEAN_FILES = [DATA_PROCESSED_DIR, RESULTS_DIR]
+REMOVE_OLD_DIRS = [DATA_PROCESSED_DIR, RESULTS_DIR]
+CREATE_DIRS = [DATA_PROCESSED_DIR, RESULTS_DIR, PLOTS_DIR, OUTPUTS_DIR, MODELS_DIR]
+
 # ---------------------------- STYLE ------------------------------- #
 PALETTE = {
     'navy': '#1E3A5F',

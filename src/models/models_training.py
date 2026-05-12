@@ -6,16 +6,15 @@ from sklearn.linear_model import Ridge
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 import joblib, os
 
-from configs.config import MODELS_DIR, DATA_PROCESSED_Y_TRAIN, DATA_PROCESSED_X_TRAINED_FINAL, OUTPUTS_DIR, PLOTS_DIR, \
-    PALETTE, RANDOM_FOREST_MODEL_PATH
+from configs.config_paths_and_params import MODELS_DIR, DATA_PROCESSED_Y_TRAIN, DATA_PROCESSED_X_TRAINED_FINAL, OUTPUTS_DIR, \
+    PLOTS_DIR, \
+    PALETTE, RANDOM_FOREST_MODEL_PATH, TRAIN_METRICS_PATH, PLOT_06_RF_IMPORTANCE_TRAINED_PATH
 from main import logging
 from main import Fore, Style, init
 
 X_train = pd.read_csv(DATA_PROCESSED_X_TRAINED_FINAL)
 y_train = pd.read_csv(DATA_PROCESSED_Y_TRAIN).squeeze()
 models = None
-
-os.makedirs(MODELS_DIR, exist_ok=True)
 
 
 def train_models():
@@ -48,7 +47,6 @@ def train_models():
                               'Train MAE': mae, 'Train RMSE': rmse})
 
         # Save fitted model
-        os.makedirs(MODELS_DIR, exist_ok=True)
         joblib.dump(model, f'{MODELS_DIR}/{name.replace(" ", "_")}.pkl')
 
         print(f"{name}: R²={r2:.4f}, MAE={mae:.4f}, RMSE={rmse:.4f}")
@@ -58,14 +56,13 @@ def train_models():
             f"{Fore.GREEN}✓ {name.replace(" ", "_")} Model trained and saved. {MODELS_DIR}\\{name.replace(" ", "_")}.pkl {Style.RESET_ALL}\n ")
 
     df_train_results = pd.DataFrame(train_results)
-    os.makedirs(OUTPUTS_DIR, exist_ok=True)
-    df_train_results.to_csv(f'{OUTPUTS_DIR}/train_metrics.csv', index=False)
+    df_train_results.to_csv(f'{TRAIN_METRICS_PATH}', index=False)
 
-    logging.info(f'Train Metrics saved. {OUTPUTS_DIR}/train_metrics.csv')
+    logging.info(f'Train Metrics saved. {TRAIN_METRICS_PATH}')
 
     print(df_train_results.to_string(index=False))
 
-    print(f"{Fore.GREEN}\n✓ Train Metrics saved. {OUTPUTS_DIR}/train_metrics.csv' {Style.RESET_ALL} ")
+    print(f"{Fore.GREEN}\n✓ Train Metrics saved. {TRAIN_METRICS_PATH}' {Style.RESET_ALL} ")
 
 
 # Feature Importance Visualization from Random Forest
@@ -86,7 +83,7 @@ def feature_imp_viz():
     imp.plot(
         kind='barh',
         ax=ax,
-        color=PALETTE['teal']
+        color='#1e3a5f'
     )
 
     ax.invert_yaxis()
@@ -106,18 +103,12 @@ def feature_imp_viz():
     ax.tick_params(axis='y', colors=PALETTE['gray'])
 
     plt.tight_layout()
-
-    plt.savefig(
-        f'{PLOTS_DIR}/06_rf_importance_trained.png',
-        dpi=150
-    )
-
+    plt.savefig(PLOT_06_RF_IMPORTANCE_TRAINED_PATH, dpi=150)
     plt.show()
 
+    logging.info(f'Random Forest Feature Importance Trained plot saved {PLOT_06_RF_IMPORTANCE_TRAINED_PATH}')
     print(
-        f"{Fore.GREEN}\n✓ Random Forest Feature Importance Trained plot saved {str(os.path.join(PLOTS_DIR, '06_rf_importance_trained.png'))} {Style.RESET_ALL} ")
-    logging.info(
-        f'Random Forest Feature Importance Trained plot saved {str(os.path.join(PLOTS_DIR, '06_rf_importance_trained.png'))}')
+        f"{Fore.GREEN}\n✓ Random Forest Feature Importance Trained plot saved {PLOT_06_RF_IMPORTANCE_TRAINED_PATH} {Style.RESET_ALL} ")
 
 
 def models_training_main():

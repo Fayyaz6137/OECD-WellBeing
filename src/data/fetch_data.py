@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import requests
-from configs.config import DATA_RAW_EXCEL_PATH
+from configs.config_paths_and_params import DATA_RAW_EXCEL_PATH
 from main import logging
 from main import Fore, Style, init
 
