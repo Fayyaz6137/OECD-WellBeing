@@ -1,6 +1,4 @@
-import pandas as pd
-
-from configs.config_paths_and_params import LOG_PATH, LOGS_DIR, TRAIN_METRICS_PATH
+from configs.config_paths_and_params import LOG_PATH, LOGS_DIR
 import os
 
 os.makedirs(LOGS_DIR, exist_ok=True)
