@@ -6,7 +6,8 @@ from sklearn.linear_model import Ridge
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 import joblib, os
 
-from configs.config_paths_and_params import MODELS_DIR, DATA_PROCESSED_Y_TRAIN, DATA_PROCESSED_X_TRAINED_FINAL, OUTPUTS_DIR, \
+from configs.config_paths_and_params import MODELS_DIR, DATA_PROCESSED_Y_TRAIN, DATA_PROCESSED_X_TRAINED_FINAL, \
+    OUTPUTS_DIR, \
     PLOTS_DIR, \
     PALETTE, RANDOM_FOREST_MODEL_PATH, TRAIN_METRICS_PATH, PLOT_06_RF_IMPORTANCE_TRAINED_PATH
 from main import logging
@@ -46,7 +47,7 @@ def train_models():
         train_results.append({'Model': name, 'Train R²': r2,
                               'Train MAE': mae, 'Train RMSE': rmse})
 
-        # Save fitted model
+        # Save  model
         joblib.dump(model, f'{MODELS_DIR}/{name.replace(" ", "_")}.pkl')
 
         print(f"{name}: R²={r2:.4f}, MAE={mae:.4f}, RMSE={rmse:.4f}")
