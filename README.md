@@ -6,7 +6,7 @@ OECD-WellBeing/
 │
 ├── README.md
 ├── requirements.txt
-├── main.py
+├── main.py                                 #---------------- Starting Point ----------------#
 ├── .gitignore
 │
 ├── configs/
@@ -21,22 +21,22 @@ OECD-WellBeing/
 ├── logs/
 │
 ├── src/
-│   ├── data/
+│   ├── data/                               #---------------- Phase 1 ----------------#
 │   │   ├── fetch_data.py
 │   │   ├── pre_process_data.py 
 │   │   └── exp_data_analysis.py              
 │   │
-│   ├── processing/
+│   ├── processing/                         #---------------- Phase 2 ----------------#
 │   │   ├── feature_engineering.py   
 │   │   ├── feature_selection.py 
 │   │   └── process.py       
 │   │
-│   ├── models/
+│   ├── models/                             #---------------- Phase 3 ----------------#
 │   │   ├── models_training.py    
 │   │   ├── models_testing.py  
 │   │   └── models_analysis.py                   
 │   │
-│   └── final_results.py
+│   └── final_results.py                    #---------------- Phase 4 ----------------#
 │
 ├── results/
 │   ├── models/
