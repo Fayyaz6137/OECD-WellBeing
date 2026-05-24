@@ -1,6 +1,6 @@
 
 # 🗂 Project Structure
-**Note: logs**, **results** and **data/processed** Folders will be generated when the program is run.
+**Note: logs**, **results** and **data/processed** will be generated when the program is run.
 ```python
 OECD-WellBeing/
 │
