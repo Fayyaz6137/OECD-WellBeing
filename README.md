@@ -9,7 +9,7 @@ OECD-WellBeing/
 ├── main.py                                 #---------------- Starting Point ----------------#
 ├── .gitignore
 │
-├── configs/
+├── configs/                                #---------------- Phase 0 ----------------#
 │   ├── config_dirs.py
 │   ├── config_paths_and_params.py
 │   └── config_setup.py
