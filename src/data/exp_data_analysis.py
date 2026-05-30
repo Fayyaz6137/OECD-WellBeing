@@ -63,7 +63,7 @@ def categorical_analysis():
     print(f"\nCountry: {n_countries} unique values")
     print(f"Region:  {n_regions} unique values")
 
-    # Regions per country — to check if modeling will be country-confounded
+    # Regions per country to check if modeling will be country-confounded
     regions_per_country = df.groupby('Country')['Region'].count().sort_values(ascending=False)
     print("\nTop 10 countries by region count:")
     print(regions_per_country.head(10))

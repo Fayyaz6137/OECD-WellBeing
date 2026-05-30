@@ -8,7 +8,7 @@ logging.basicConfig(
     filename=LOG_PATH,
     format='%(asctime)s : %(levelname)s : %(message)s',
     datefmt='%H:%M:%S',
-    level=logging.INFO  
+    level=logging.INFO
 )
 
 from colorama import Fore, Style, init
